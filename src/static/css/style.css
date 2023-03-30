@@ -1,0 +1,11 @@
+.body {
+    margin-top: 84px !important;
+}
+footer {
+    height: 60px;
+    line-height: 60px;
+}
+
+nav.navbar  {
+    height: 60px;
+}
