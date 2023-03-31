@@ -11,7 +11,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -20,6 +20,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'blog',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -37,7 +40,7 @@ ROOT_URLCONF = 'django_nuxt_blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,7 +77,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -83,5 +86,9 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+   BASE_DIR / 'static',
+]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
