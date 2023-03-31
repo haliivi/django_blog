@@ -1,11 +1,12 @@
 body {
-    padding-top: 84px !important;
+    padding: 84px 84px !important;
 }
+
 footer {
     height: 60px;
     line-height: 60px;
 }
 
-nav.navbar  {
+nav.container-fluid  {
     height: 60px;
 }
