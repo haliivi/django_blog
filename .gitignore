@@ -2,3 +2,7 @@ __pycache__
 .idea
 *.sqlite3
 .env
+dump.json
+media
+admin
+ckeditor

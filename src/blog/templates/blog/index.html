@@ -5,103 +5,22 @@
     <div class="container">
         <h1 class="my-3 text-center">Последние записи блога</h1>
         <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <img src="https://picsum.photos/id/115/800/300" class="card-img-top" alt="img-article-1">
-                    <div class="card-body">
-                        <h5 class="card-title">Заголовок статьи</h5>
-                        <p class="card-text">Краткое описание статьи ...</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a href="#" class="btn btn-primary">Перейти</a>
-                            <small class="text-muted">05.09.2022</small>
+            {% for post in page_obj %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img src="media/{{ post.image }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.h1 }}</h5>
+                            {{ post.description|safe|truncatechars:100 }}
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="#" class="btn btn-primary">Перейти</a>
+                                <small class="text-muted">{{ post.created_at }}</small>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <img src="https://picsum.photos/id/1/800/300" class="card-img-top" alt="img-article-2">
-                    <div class="card-body">
-                        <h5 class="card-title">Заголовок статьи</h5>
-                        <p class="card-text">Краткое описание статьи ...</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a href="#" class="btn btn-primary">Перейти</a>
-                            <small class="text-muted">06.08.2020</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <img src="https://picsum.photos/id/152/800/300" class="card-img-top" alt="img-article-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Заголовок статьи</h5>
-                        <p class="card-text">Краткое описание статьи ...</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a href="#" class="btn btn-primary">Перейти</a>
-                            <small class="text-muted">23.01.2020</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <img src="https://picsum.photos/id/74/800/300" class="card-img-top" alt="img-article-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Заголовок статьи</h5>
-                        <p class="card-text">Краткое описание статьи ...</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a href="#" class="btn btn-primary">Перейти</a>
-                            <small class="text-muted">15.07.2020</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <img src="https://picsum.photos/id/98/800/300" class="card-img-top" alt="img-article-5">
-                    <div class="card-body">
-                        <h5 class="card-title">Заголовок статьи</h5>
-                        <p class="card-text">Краткое описание статьи ...</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a href="#" class="btn btn-primary">Перейти</a>
-                            <small class="text-muted">06.04.2019</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <img src="https://picsum.photos/id/34/800/300" class="card-img-top" alt="img-article-6">
-                    <div class="card-body">
-                        <h5 class="card-title">Заголовок статьи</h5>
-                        <p class="card-text">Краткое описание статьи ...</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a href="#" class="btn btn-primary">Перейти</a>
-                            <small class="text-muted">19.10.2023</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
-    <div class="container">
-        <nav aria-label="pagination df">
-            <ul class="pagination justify-content-center mb-0">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+    {% include 'paginator.html' %}
 {% endblock body %}
