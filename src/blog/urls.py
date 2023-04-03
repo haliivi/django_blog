@@ -7,4 +7,5 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('blog/<slug>/', PostDetailView.as_view(), name='post_detail'),
+    path('signup/', SignUpView.as_view(), name='signup'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

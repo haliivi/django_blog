@@ -1,40 +1,45 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+__all__ = [
+    'SignUpForm',
+]
 
 
-class SigUpForm(forms.Form):
+class SignUpForm(forms.Form):
     username = forms.CharField(
         max_length=100,
         required=True,
         widget=forms.TextInput(attrs={
-            'class': "form-control",
-            'id': "inputUsername",
+            'class': 'form-control',
+            'id': 'inputUsername',
         }),
+        label='Имя пользователя',
     )
 
     password = forms.CharField(
         required=True,
         widget=forms.PasswordInput(attrs={
-            'class': "form-control",
-            'id': "inputPassword",
+            'class': 'form-control',
+            'id': 'inputPassword',
         }),
+        label='Пароль',
     )
     repeat_password = forms.CharField(
         required=True,
         widget=forms.PasswordInput(attrs={
-            'class': "form-control",
-            'id': "ReInputPassword",
+            'class': 'form-control',
+            'id': 'ReInputPassword',
         }),
+        label='Повторите пароль',
     )
 
     def clean(self):
         password = self.cleaned_data['password']
         confirm_password = self.cleaned_data['repeat_password']
-
         if password != confirm_password:
             raise forms.ValidationError(
-                "Пароли не совпадают"
+                'Пароли не совпадают'
             )
 
     def save(self):
