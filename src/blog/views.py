@@ -1,8 +1,11 @@
 from django.contrib.auth import login, authenticate
+from django.core.mail import BadHeaderError, send_mail
 from django.core.paginator import Paginator
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, FormView
+from django.conf import settings
 from .models import *
 from .forms import *
 
@@ -11,6 +14,8 @@ __all__ = [
     'PostDetailView',
     'SignUpView',
     'SignInView',
+    'FeedBackView',
+    'SuccessView',
 ]
 
 
@@ -62,3 +67,25 @@ class SignInView(FormView):
         if user is not None:
             login(self.request, user)
             return super().form_valid(form)
+
+
+class FeedBackView(FormView):
+    template_name = 'blog/contacts.html'
+    form_class = FeedBackForm
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        name = form.cleaned_data['name']
+        from_email = form.cleaned_data['email']
+        subject = form.cleaned_data['subject']
+        message = form.cleaned_data['message']
+        try:
+            send_mail(f'От {name} | {subject}', message, from_email, [settings.EMAIL_HOST_USER])
+
+        except BadHeaderError:
+            return HttpResponse('Невалидный заголовок')
+        return HttpResponseRedirect('success')
+
+
+class SuccessView(TemplateView):
+    template_name = 'blog/success.html'
