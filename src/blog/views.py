@@ -1,4 +1,4 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
@@ -10,6 +10,7 @@ __all__ = [
     'IndexView',
     'PostDetailView',
     'SignUpView',
+    'SignInView',
 ]
 
 
@@ -47,3 +48,17 @@ class SignUpView(FormView):
         if user is not None:
             login(self.request, user)
         return super().form_valid(form)
+
+
+class SignInView(FormView):
+    template_name = 'blog/signin.html'
+    form_class = SignInForm
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        username = self.request.POST['username']
+        password = self.request.POST['password']
+        user = authenticate(self.request, username=username, password=password)
+        if user is not None:
+            login(self.request, user)
+            return super().form_valid(form)
