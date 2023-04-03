@@ -13,7 +13,7 @@
                             <h5 class="card-title">{{ post.h1 }}</h5>
                             {{ post.description|safe|truncatechars:100 }}
                             <div class="d-flex justify-content-between align-items-center">
-                                <a href="#" class="btn btn-primary">Перейти</a>
+                                <a href="{% url 'post_detail' slug=post.url %}" class="btn btn-primary">Перейти</a>
                                 <small class="text-muted">{{ post.created_at }}</small>
                             </div>
                         </div>
