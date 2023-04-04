@@ -11,19 +11,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-EMAIL_HOST = 'smtp.gmail.com'
-
-EMAIL_USE_TLS = True
-
-EMAIL_PORT = 587
-
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -32,10 +20,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',
-    'ckeditor',
-    'ckeditor_uploader',
-    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -48,12 +32,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'django_nuxt_blog.urls'
+ROOT_URLCONF = 'django_blog.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -66,7 +50,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'django_nuxt_blog.wsgi.application'
+WSGI_APPLICATION = 'django_blog.wsgi.application'
 
 DATABASES = {
     'default': {
@@ -90,7 +74,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -98,44 +82,8 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
-if DEBUG:
-    STATICFILES_DIRS = [
-        BASE_DIR / 'static',
-    ]
-else:
-    STATIC_ROOT = BASE_DIR / 'static'
-
-MEDIA_URL = '/media/'
-
-MEDIA_ROOT = BASE_DIR / 'media'
-
-CKEDITOR_UPLOAD_PATH = 'uploads/'
+STATIC_ROOT = BASE_DIR / 'static'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
-
-CKEDITOR_IMAGE_BACKEND = 'pillow'
-
-LOGOUT_REDIRECT_URL = '/'
-
-CKEDITOR_CONFIGS = {
-    'default': {
-        'removePlugins': 'stylesheetparser',
-        'allowedContent': True,
-        'toolbar_Full': [
-            ['Styles', 'Format', 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat'],
-            ['Image', 'Flash', 'Table', 'HorizontalRule'],
-            ['TextColor', 'BGColor'],
-            ['Smiley', 'sourcearea', 'SpecialChar'],
-            ['Link', 'Unlink', 'Anchor'],
-            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language'],
-            ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates'],
-            ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'],
-            ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt'],
-            ['Maximize', 'ShowBlocks']
-        ],
-    }
-}
