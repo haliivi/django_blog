@@ -51,6 +51,18 @@ class PostDetailView(TemplateView):
         context['last_posts'] = last_posts
         return context
 
+    def post(self, request, slug, *args, **kwargs):
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            text = request.POST['text']
+            username = self.request.user
+            post = get_object_or_404(Post, url=slug)
+            Comment.objects.create(post=post, username=username, text=text)
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        return render(request, 'blog/post_detail.html', context={
+            'comment_form': comment_form
+        })
+
 
 class SignUpView(FormView):
     template_name = 'blog/signup.html'
