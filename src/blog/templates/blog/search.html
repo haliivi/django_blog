@@ -16,7 +16,6 @@
                         <li class="breadcrumb-item active" aria-current="page">Поиск</li>
                     </ol>
                 </nav>
-
                 <p class="lead">Найдено записей: {{ count }}</p>
                 {% for result in page_obj %}
                     <a href="{% url 'post_detail' slug=result.url %}"><h2>{{ result.h1 }}</h2></a>

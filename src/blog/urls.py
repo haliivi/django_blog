@@ -14,5 +14,5 @@ urlpatterns = [
     path('contact/', FeedBackView.as_view(), name='contact'),
     path('contact/success/', SuccessView.as_view(), name='success'),
     path('search/', SearchResultsView.as_view(), name='search_results'),
-    path('tag/<slug:slug>/', TagView.as_view(), name="tag"),
+    path('tag/<slug:slug>/', TagView.as_view(), name='tag'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

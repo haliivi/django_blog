@@ -44,7 +44,11 @@ class PostDetailView(TemplateView):
         context = super().get_context_data(**kwargs)
         slug = kwargs.get('slug')
         post = get_object_or_404(Post, url=slug)
+        common_tags = Post.tag.most_common()
+        last_posts = Post.objects.all().order_by('-id')[:5]
         context['post'] = post
+        context['common_tags'] = common_tags
+        context['last_posts'] = last_posts
         return context
 
 

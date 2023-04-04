@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}{{ title }}{% endblock %}
-{% block content %}
+{% block body %}
     <div class="container">
         <p class="my-3">Другие теги:
             {% for mt in common_tags %}
-                 <a href="{% url 'tag' mt.slug %}" class="badge badge-success">#{{mt}}</a>
+                 <a href="{% url 'tag' mt.slug %}" class="badge text-bg-info mr-1">#{{mt}}</a>
             {% endfor %}
         </p>
         <div class="row">
@@ -16,11 +16,11 @@
                             <h4 class="card-title">{{ post.h1 }}</h4>
                             {{ post.description|safe|truncatechars:100 }}<br>
                             {% for tag in post.tag.all %}
-                                <a href="{% url 'tag' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
+                                <a href="{% url 'tag' tag.slug %}" class="badge text-bg-info mr-1">#{{ tag }}</a>
                             {% endfor %}
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="{% url 'post_detail' slug=post.url %}" class="btn btn-sm btn-outline-secondary">Подробнее</a>
+                                <a href="{% url 'post_detail' slug=post.url %}" class="btn btn-primary">Перейти</a>
                             </div>
                                 <small class="text-muted">{{ post.created_at }}</small>
                             </div>
@@ -30,4 +30,4 @@
             {% endfor %}
         </div>
     </div>
-{% endblock %}
+{% endblock body %}

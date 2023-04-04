@@ -1,6 +1,6 @@
 {% extends 'paginator.html' %}
 {% block previous_link %}
-    ?page={{ results.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}
+    ?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}
 {% endblock previous_link %}
 {% block number_link_active %}
     ?page={{ i }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}
@@ -9,5 +9,5 @@
     ?page={{ i }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}
 {% endblock number_link %}
 {% block next_link %}
-    ?page={{ results.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}
+    ?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}
 {% endblock next_link %}
