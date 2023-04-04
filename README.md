@@ -1,1 +1,1 @@
-Portfolyo project using Django on backend and Nuxt.js on frontend.
+Portfolyo project using Django.
