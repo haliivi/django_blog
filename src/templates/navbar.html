@@ -19,10 +19,12 @@
                 </li>
             </ul>
             <ul class="navbar-nav">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Поиск..." aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Поиск</button>
-                </form>
+                {% if request.path != search_results %}
+                    <form action="{% url 'search_results' %}" method="get" class="d-flex" role="search">
+                        <input name="q" class="form-control me-2" type="search" placeholder="Поиск..." aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Поиск</button>
+                    </form>
+                {% endif %}
                 {% if not user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'signup' %}">Регистрация</a>

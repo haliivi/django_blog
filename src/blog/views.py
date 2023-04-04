@@ -1,11 +1,14 @@
 from django.contrib.auth import login, authenticate
 from django.core.mail import BadHeaderError, send_mail
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import TemplateView, FormView
 from django.conf import settings
+from taggit.models import Tag
 from .models import *
 from .forms import *
 
@@ -16,6 +19,8 @@ __all__ = [
     'SignInView',
     'FeedBackView',
     'SuccessView',
+    'SearchResultsView',
+    'TagView',
 ]
 
 
@@ -89,3 +94,32 @@ class FeedBackView(FormView):
 
 class SuccessView(TemplateView):
     template_name = 'blog/success.html'
+
+
+class SearchResultsView(View):
+    def get(self, request, *args, **kwargs):
+        query = self.request.GET.get('q')
+        results = ''
+        if query:
+            results = Post.objects.filter(
+                Q(h1__icontains=query) | Q(content__icontains=query)
+            )
+        paginator = Paginator(results, 6)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'blog/search.html', context={
+            'page_obj': page_obj,
+            'count': paginator.count
+        })
+
+
+class TagView(View):
+    def get(self, request, slug, *args, **kwargs):
+        tag = get_object_or_404(Tag, slug=slug)
+        posts = Post.objects.filter(tag=tag)
+        common_tags = Post.tag.most_common()
+        return render(request, 'blog/tag.html', context={
+            'title': f'#ТЕГ {tag}',
+            'posts': posts,
+            'common_tags': common_tags
+        })

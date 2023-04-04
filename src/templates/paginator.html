@@ -3,7 +3,7 @@
         <ul class="pagination justify-content-center mb-0">
             {% if page_obj.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">
+                    <a class="page-link" href="{% block previous_link %}?page={{ page_obj.previous_page_number }}{% endblock previous_link %}" tabindex="-1">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
@@ -16,14 +16,14 @@
             {% endif %}
             {% for i in page_obj.paginator.page_range %}
                 {% if i == page_obj.number %}
-                    <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    <li class="page-item active"><a class="page-link" href="{% block number_link_active %}?page={{ i }}{% endblock number_link_active %}">{{ i }}</a></li>
                 {% else %}
-                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    <li class="page-item"><a class="page-link" href="{% block number_link %}?page={{ i }}{% endblock number_link %}">{{ i }}</a></li>
                 {% endif %}
             {% endfor %}
             {% if page_obj.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                    <a class="page-link" href="{% block next_link %}?page={{ page_obj.next_page_number }}{% endblock next_link %}">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
